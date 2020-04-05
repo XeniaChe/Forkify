@@ -60,7 +60,7 @@ export default class Recipe {
                     count = eval(arrIng[0].replace('-', '+'));
                 } else {
                     count = eval(arrIng.slice(0, unitIndex).join('+'));
-                }
+                };
 
                 objIng = {
                     count,
@@ -74,20 +74,31 @@ export default class Recipe {
                     count: parseInt(arrIng[0], 10),
                     unit: '',
                     ingredient: arrIng.slice(1).join(' ')
-                }
+                };
             } else if (unitIndex === -1) {
                 // There is NO unit and NO number in 1st position
                 objIng = {
                     count: 1,
                     unit: '',
                     ingredient
-                }
-            }
+                };
+            };
 
             return objIng;
         });
         this.ingredients = newIngredients;
-    }
+    };
+    
+    updateServing (type) {
+        // serving
+        const newServing  = type === 'inc' ? this.serving + 1 : this.serving - 1;
+        this.ingredients.forEach( ing => {
+            ing.count *= (newServing / this.serving); //  ing.count =  ing.count * newServing/ this.ingredients
+            // ing.count =Math.round(ing.count*(newServing / this.serving)); //  ing.count =  ing.count * newServing/ this.ingredients
+        });
 
+        // ingredient
+        this.serving = newServing;
+    };
     
 };

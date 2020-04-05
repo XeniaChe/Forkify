@@ -64,7 +64,7 @@ elements.searchForm.addEventListener('submit', el => {
 
 /** Small buttons */
 elements.searchButtonPages.addEventListener('click', event =>{
-    const btn = event.target.closest(elementsSecond.btn);
+    const btn = event.target.closest(`.btn-inline`);
 
     if (btn) {
         const goToPage = parseInt(btn.dataset.goto);
@@ -103,6 +103,9 @@ const controlRecipe = async () => {
         //2. Create new recipe object
         state.recipe = new Recipe(id);
 
+        //3. Hightlight the element
+        if (state.search) searchView.highlightSelected(id);
+
         try {
             //3. Get the recipe data and parse ingredients
             await state.recipe.getRecipe();
@@ -115,6 +118,7 @@ const controlRecipe = async () => {
             //5.Render recipe
             clearLoader();
             recipeView.renderRecipe(state.recipe);
+            
 
         } catch (error) {
             alert(` Error processing the recipe`)
@@ -124,6 +128,24 @@ const controlRecipe = async () => {
 
 
 ['hashchange', 'load'].forEach( event => window.addEventListener(event, controlRecipe));
+
+elements.recipe.addEventListener( 'click', ev => {
+
+     
+    if (ev.target.matches(`.btn-decrease,  .btn-decrease *`)) {
+        // decrease the ingredients
+        
+        if (state.recipe.serving > 1) {
+            state.recipe.updateServing('dec');
+            recipeView.updateIngredient(state.recipe);
+           }
+    } else if (ev.target.matches(`.btn-increase,  .btn-increase *`)) {
+        // inccrease the ingredients
+        state.recipe.updateServing('inc');
+        recipeView.updateIngredient(state.recipe);
+    };
+    
+});
 
 
 

@@ -11,6 +11,14 @@ export const clearList = () => {
     elements.searchButtonPages.innerHTML = ' ';
 };
 
+export const highlightSelected = id => {
+    const arrResult = Array.from(document.querySelectorAll('.results__link'));
+    arrResult.forEach( el => {
+        el.classList.remove(`results__link--active`);
+    });
+    document.querySelector(`a[href="#${id}"]`).classList.add(`results__link--active`);
+};
+
 const limitTitleText = ( title, limit = 17) => {
     const newTitle = [];
     if (title.lenght > limit) {
@@ -30,7 +38,7 @@ const limitTitleText = ( title, limit = 17) => {
 const renderRecipe = recipe => {  // for  one recipe
     const markUp = `
             <li>
-                <a class="results__link results__link--active" href="#${recipe.recipe_id}">
+                <a class="results__link results__link" href="#${recipe.recipe_id}">
                     <figure class="results__fig">
                         <img src="${recipe.image_url}" alt="Test">
                     </figure>
