@@ -3,7 +3,6 @@ const sass = require('gulp-sass');
 const imagemin = require('gulp-imagemin');
 const minifycss = require('gulp-minify-css');
 const newer = require('gulp-newer');
-// const rename = require('gulp-rename');
 const browserSync = require('browser-sync');
 
 //development mode
@@ -25,7 +24,6 @@ function style() {
     .pipe(rename({suffix: '.min'}))
     .pipe(minifycss())
     .pipe(gulp.dest(build + 'css/'))
-    // .pipe(notify({message: 'Style task complete'}))
     ;
 }
 exports.style = style;
@@ -51,7 +49,6 @@ function images(){
     .pipe(newer(out))
     .pipe(imagemin({optimizationlevel: 5 }))
     .pipe(gulp.dest(build + 'imagesMIN'));
-    // .pipe(gulp.dest(out));
 };
 exports.images = images;
 

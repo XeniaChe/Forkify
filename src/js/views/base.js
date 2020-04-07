@@ -5,7 +5,9 @@ export const elements = {
     searchResult: document.querySelector('.results'),
     searchButtonPages: document.querySelector('.results__pages'),
     recipe: document.querySelector('.recipe'),
-    shopingList: document.querySelector('.shopping__list')
+    shopingList: document.querySelector('.shopping__list'),
+    likesMenu: document.querySelector(`.likes`),
+    likesList: document.querySelector(`.likes__list`),
 };
 
 export  const elementsSecond = {
@@ -17,7 +19,7 @@ export const renderLoader = parent => {
     const loader = `
         <div class="${elementsSecond.loader}">
             <svg> 
-            <use href="imagesMIN/icons.svg#icon-cw"></use>
+            <use href="img/icons.svg#icon-cw"></use>
             </svg> 
          </div>
     `;

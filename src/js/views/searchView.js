@@ -16,10 +16,10 @@ export const highlightSelected = id => {
     arrResult.forEach( el => {
         el.classList.remove(`results__link--active`);
     });
-    document.querySelector(`a[href="#${id}"]`).classList.add(`results__link--active`);
+    document.querySelector(`.results__link[href*="${id}"]`).classList.add(`results__link--active`);
 };
 
-const limitTitleText = ( title, limit = 17) => {
+export const limitTitleText = ( title, limit = 17) => {
     const newTitle = [];
     if (title.lenght > limit) {
         title.split(' ').reduce((accumulator, cur) =>{
@@ -57,7 +57,7 @@ const createButton = (page, type) =>
     `<button class="btn-inline results__btn--${type}" data-goto=${type=== 'prev' ? page-1 : page+1}>
         <span>Page ${type=== 'prev' ? page - 1 : page + 1}</span>
         <svg class="search__icon">
-            <use href="imagesMIN/icons.svg#icon-triangle-${type === 'prev' ? 'left' : 'right'} "></use>
+            <use href="img/icons.svg#icon-triangle-${type === 'prev' ? 'left' : 'right'} "></use>
         </svg>
     </button>
     `;
